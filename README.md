@@ -14,3 +14,5 @@ Rules:
 **IDEALLY**: Arrays should be weighted as evenly as possible.
 
 In the example above, the ideal return would be [ [8, 3], [5, 5, 2] ]
+
+*Written in Ruby 2.0.0.*
