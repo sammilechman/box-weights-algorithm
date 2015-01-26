@@ -1,4 +1,4 @@
-Algorithm for determining which package should go in which box.
+Algorithm: Sorting weighted packages into boxes
 ===
 
 I have an unordered array containing product weights, e.g. [3, 2, 5, 5, 8] which need to be divided up into smaller arrays.

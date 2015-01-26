@@ -1,5 +1,3 @@
-require 'pry'
-
 def my_algorithm(arr)
   array = arr.sort
   num_return_arrays = (array.inject(:+) / 16.0).ceil
