@@ -35,6 +35,7 @@ def my_algorithm(arr)
     end
   end
 
+  # change to .present? for rails
   if array.any?
     # leftovers! an edge case. leftover weight is necessarily < 16.
     to_add_to_sorted_arrays = [[], 0]
@@ -45,5 +46,5 @@ def my_algorithm(arr)
   end
 
   # don't need to keep running totals, return a 2-D array.
-  sorted_arrays.map { |array| array.first }
+  sorted_arrays.map(&:first)
 end
