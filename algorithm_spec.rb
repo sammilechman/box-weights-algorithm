@@ -21,6 +21,10 @@ describe "box sorting algorithm" do
     it "when num_return_arrays is incorrect" do
       expect(my_algorithm([9, 9, 9])).to eq([[9], [9], [9]])
     end
+
+    it "when 4 boxes must be used, and weighted correctly" do
+      expect(my_algorithm([9, 10, 11, 12, 1, 2])).to eq([[12], [11], [10,1], [9, 2]])
+    end
   end
 
   context "throws error correctly" do
