@@ -54,6 +54,7 @@ end
 
 def raise_exception_if_invalid(arr)
   raise "Input is not an array" unless arr.is_a?(Array)
+  raise "Input array is empty" if arr.empty?
   arr.each do |el|
     if (el.is_a?(Float) || el.is_a?(Fixnum))
       if !(el >= 0)
