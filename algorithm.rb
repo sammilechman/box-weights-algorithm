@@ -1,4 +1,5 @@
 def my_algorithm(arr)
+  raise_exception_if_invalid(arr)
   array = arr.sort
   num_return_arrays = (array.inject(:+) / 16.0).ceil
 
@@ -26,11 +27,13 @@ def my_algorithm(arr)
           end
         end
       else
-        # second loop actually adds the element to sorted_arrays.
-        # first update the running total
-        sorted_arrays[sorted_arrays_index_to_add_at][1] += element_to_pop
-        # then push number into the current array.
-        sorted_arrays[sorted_arrays_index_to_add_at][0] << array.pop
+        if sorted_arrays_index_to_add_at
+          # second loop actually adds the element to sorted_arrays.
+          # first update the running total
+          sorted_arrays[sorted_arrays_index_to_add_at][1] += element_to_pop
+          # then push number into the current array.
+          sorted_arrays[sorted_arrays_index_to_add_at][0] << array.pop
+        end
       end
     end
   end
@@ -47,4 +50,19 @@ def my_algorithm(arr)
 
   # don't need to keep running totals, return a 2-D array.
   sorted_arrays.map(&:first)
+end
+
+def raise_exception_if_invalid(arr)
+  raise "Input is not an array" unless arr.is_a?(Array)
+  arr.each do |el|
+    if (el.is_a?(Float) || el.is_a?(Fixnum))
+      if !(el >= 0)
+        raise "Invalid weight - less than 0"
+      elsif !(el <= 16)
+        raise "Invalid weight - more than 16"
+      end
+    else
+      raise "Invalid weight - not a number"
+    end
+  end
 end
