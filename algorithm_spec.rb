@@ -14,7 +14,7 @@ describe "box sorting algorithm" do
       expect(my_algorithm([8, 4, 2, 2, 2, 2, 2, 2])).to eq([[8, 2, 2], [4, 2, 2, 2, 2]])
     end
 
-    it "when boxes should end up with a different number of items" do
+    it "when boxes are balanced with a different number of items" do
       expect(my_algorithm([9, 5, 3, 1])).to eq([[9], [5, 3, 1]])
     end
 
