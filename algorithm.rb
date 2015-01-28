@@ -6,7 +6,7 @@ def my_algorithm(arr)
   raise_exception_if_invalid(arr)
   boxes = generate_boxes(arr)
   arr.sort.reverse.each do |a|
-    boxes.sort_by! { |b| b.sum }
+    boxes.sort_by! { |b| [b.sum, b.length] }
     if boxes[0].sum + a > MAX_WEIGHT && boxes[0].sum != 0
       boxes << [a]
     else
@@ -35,3 +35,5 @@ def generate_boxes(array)
   num_return_arrays += oversized_packages.count
   Array.new(num_return_arrays) { [] }
 end
+
+#TO DO: determine boxes better.
