@@ -6,7 +6,6 @@ def benchmark_algo(input)
   Benchmark.bm do |x|
     a = x.report { 100000.times { my_algorithm(input) } }
     b = x.report { 100000.times { my_algorithm2(input) } }
-    puts b/a
   end
 end
 
