@@ -1,7 +1,12 @@
+MAX_BOX_WEIGHT = 16.0
+
 def my_algorithm(arr)
   raise_exception_if_invalid(arr)
   array = arr.sort
-  num_return_arrays = (array.inject(:+) / 16.0).ceil
+  oversized_packages = array.select{|line_item| line_item > MAX_BOX_WEIGHT}
+  undersized_packages = array - oversized_packages
+
+  num_return_arrays = (undersized_packages.inject(:+) / MAX_BOX_WEIGHT).ceil + oversized_packages.count
 
   sorted_arrays = Array.new(num_return_arrays)
   sorted_arrays.map!{|x| [[], 0]}
@@ -13,36 +18,29 @@ def my_algorithm(arr)
     lowest_total = 1000
     sorted_arrays_index_to_add_at = nil
     element_to_pop = array.last
+    need_another_box = true
 
-    2.times do |loop|
-      if loop == 0
-        # this loop determines the package to add to
-        need_another_box = true
-        sorted_arrays.each_with_index do |x, i|
-          break if array.empty?
-          total_after_add = x[1] + element_to_pop
-          if (total_after_add < lowest_total) && ((x[1] + element_to_pop) <= 16)
-            lowest_total = total_after_add
-            sorted_arrays_index_to_add_at = i
-            # found a suitable spot - won't be needing an additional box
-            need_another_box = false
-          end
-        end
-        if need_another_box
-          # went through sorted_arrays without finding a spot.
-          # need to add another box.
-          to_add_to_sorted_arrays = [[], 0]
-          sorted_arrays << to_add_to_sorted_arrays
-        end
-      else
-        # this loop actually adds the element to sorted_arrays
-        if sorted_arrays_index_to_add_at
-          # first update the running total
-          sorted_arrays[sorted_arrays_index_to_add_at][1] += element_to_pop
-          # then push number into the current array
-          sorted_arrays[sorted_arrays_index_to_add_at][0] << array.pop
-        end
+    sorted_arrays.each_with_index do |x, i|
+      break if array.empty?
+      total_after_add = x[1] + element_to_pop
+      if x[0].empty? || ((total_after_add < lowest_total) && (total_after_add <= MAX_BOX_WEIGHT))
+        lowest_total = total_after_add
+        sorted_arrays_index_to_add_at = i
+        # found a suitable spot - won't be needing an additional box
+        need_another_box = false
       end
+    end
+
+    if need_another_box
+      # went through sorted_arrays without finding a spot - need another box
+      to_add_to_sorted_arrays = [[], 0]
+      sorted_arrays << to_add_to_sorted_arrays
+    end
+
+    if sorted_arrays_index_to_add_at
+      # update the running total, then move element into sorted_arrays
+      sorted_arrays[sorted_arrays_index_to_add_at][1] += element_to_pop
+      sorted_arrays[sorted_arrays_index_to_add_at][0] << array.pop
     end
   end
 
@@ -57,8 +55,6 @@ def raise_exception_if_invalid(arr)
     if (el.is_a?(Float) || el.is_a?(Fixnum))
       if !(el >= 0)
         raise "Invalid weight - less than 0"
-      elsif !(el <= 16)
-        raise "Invalid weight - more than 16"
       end
     else
       raise "Invalid weight - not a number"

@@ -7,15 +7,15 @@ describe "box sorting algorithm" do
     end
 
     it "when two boxes must be used" do
-      expect(my_algorithm([3, 2, 5, 5, 8])).to eq([[8, 3], [5, 5, 2]])
+      expect(my_algorithm([3, 2, 5, 5, 8])).to eq([[5, 5, 2], [8, 3]])
     end
 
     it "when many weights can fit into two boxes" do
-      expect(my_algorithm([8, 4, 2, 2, 2, 2, 2, 2])).to eq([[8, 2, 2], [4, 2, 2, 2, 2]])
+      expect(my_algorithm([8, 4, 2, 2, 2, 2, 2, 2])).to eq([[4, 2, 2, 2, 2], [8, 2, 2]])
     end
 
     it "when boxes are balanced with a different number of items" do
-      expect(my_algorithm([9, 5, 3, 1])).to eq([[9], [5, 3, 1]])
+      expect(my_algorithm([9, 5, 3, 1])).to eq([[5, 3, 1], [9]])
     end
 
     it "when num_return_arrays is incorrect" do
@@ -23,7 +23,11 @@ describe "box sorting algorithm" do
     end
 
     it "when 4 boxes must be used, and weighted correctly" do
-      expect(my_algorithm([9, 10, 11, 12, 1, 2])).to eq([[12], [11], [10,1], [9, 2]])
+      expect(my_algorithm([9, 10, 11, 12, 1, 2])).to eq([[10,1], [11], [12], [9, 2]])
+    end
+
+    it "when a too-heavy item is encountered" do
+      expect(my_algorithm([1,4,25,10])).to eq([[10,4,1],[25]])
     end
   end
 
@@ -42,10 +46,6 @@ describe "box sorting algorithm" do
 
     it "when a negative weight is included" do
       expect{my_algorithm([9, -1, 3, 1])}.to raise_error('Invalid weight - less than 0')
-    end
-
-    it "when a too heavy weight is included" do
-      expect{my_algorithm([9, 19, 3, 1])}.to raise_error('Invalid weight - more than 16')
     end
 
     it "when a non-numeric weight is included" do
