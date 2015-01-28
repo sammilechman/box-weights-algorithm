@@ -21,7 +21,6 @@ def my_algorithm(arr)
     need_another_box = true
 
     sorted_arrays.each_with_index do |x, i|
-      break if array.empty?
       total_after_add = x[1] + element_to_pop
       if x[0].empty? || ((total_after_add < lowest_total) && (total_after_add <= MAX_BOX_WEIGHT))
         lowest_total = total_after_add
