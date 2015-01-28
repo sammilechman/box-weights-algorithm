@@ -1,9 +1,9 @@
-MAX_BOX_WEIGHT = 16.0
+MAX_BOX_WEIGHT_2 = 16.0
 
-def my_algorithm(arr)
-  raise_exception_if_invalid(arr)
+def my_algorithm2(arr)
+  raise_exception_if_invalid2(arr)
   array = arr.sort
-  sorted_arrays = generate_boxes(array)
+  sorted_arrays = generate_boxes2(array)
 
   until array.empty? do
     lowest_total = 1000
@@ -13,7 +13,7 @@ def my_algorithm(arr)
 
     sorted_arrays.each_with_index do |x, i|
       total_after_add = x[1] + element_to_pop
-      if x[0].empty? || ((total_after_add < lowest_total) && (total_after_add <= MAX_BOX_WEIGHT))
+      if x[0].empty? || ((total_after_add < lowest_total) && (total_after_add <= MAX_BOX_WEIGHT_2))
         lowest_total = total_after_add
         sorted_arrays_index_to_add_at = i
         # found a suitable spot - won't be needing an additional box
@@ -38,7 +38,7 @@ def my_algorithm(arr)
   sorted_arrays.map(&:first)
 end
 
-def raise_exception_if_invalid(arr)
+def raise_exception_if_invalid2(arr)
   raise "Input is not an array" unless arr.is_a?(Array)
   raise "Input array is empty" if arr.empty?
   arr.each do |el|
@@ -50,14 +50,14 @@ def raise_exception_if_invalid(arr)
   end
 end
 
-def generate_boxes(array)
+def generate_boxes2(array)
   # generates sorted_arrays of the form: [ [[], 0], [[], 0], [[], 0], ... ]
   # zeroth element in [[], 0] represents an array we'll be returning
   # last element in [[], 0] is a running total of that zeroth element's weight
-  oversized_packages = array.select{|line_item| line_item > MAX_BOX_WEIGHT}
+  oversized_packages = array.select{|line_item| line_item > MAX_BOX_WEIGHT_2}
   undersized_packages = array - oversized_packages
 
-  num_return_arrays = (undersized_packages.inject(:+) / MAX_BOX_WEIGHT).ceil + oversized_packages.count
+  num_return_arrays = (undersized_packages.inject(:+) / MAX_BOX_WEIGHT_2).ceil + oversized_packages.count
 
   sorted_arrays = Array.new(num_return_arrays)
   sorted_arrays.map!{|x| [[], 0]}
