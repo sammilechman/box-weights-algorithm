@@ -5,7 +5,7 @@ def my_algorithm(arr)
   array = arr.sort
   sorted_arrays = generate_boxes(array)
 
-  until array.empty? do
+  until array.empty?
     lowest_total = 1000
     sorted_arrays_index_to_add_at = nil
     element_to_pop = array.last
@@ -42,7 +42,7 @@ def raise_exception_if_invalid(arr)
   raise "Input is not an array" unless arr.is_a?(Array)
   raise "Input array is empty" if arr.empty?
   arr.each do |el|
-    if (el.is_a?(Float) || el.is_a?(Fixnum))
+    if el.is_a?(Float) || el.is_a?(Fixnum)
       raise "Invalid weight - less than 0" if !(el >= 0)
     else
       raise "Invalid weight - not a number"

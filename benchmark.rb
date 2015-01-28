@@ -2,10 +2,18 @@ require 'benchmark'
 require_relative 'algorithm'
 require_relative 'algorithm2'
 
-Benchmark.bm do |x|
-  x.report { 100000.times { my_algorithm([3, 2, 5]) } }
-  x.report { 100000.times { my_algorithm2([3, 2, 5]) } }
-
-  x.report { 100000.times { my_algorithm([1, 4, 25, 87, 10]) } }
-  x.report { 100000.times { my_algorithm2([1, 4, 25, 87, 10]) } }
+def benchmark_algo(input)
+  Benchmark.bm do |x|
+    a = x.report { 100000.times { my_algorithm(input) } }
+    b = x.report { 100000.times { my_algorithm2(input) } }
+    puts b/a
+  end
 end
+
+benchmark_algo([3,2,5])
+benchmark_algo([3, 2, 5, 5, 8])
+benchmark_algo([8, 4, 2, 2, 2, 2, 2, 2])
+benchmark_algo([9, 5, 3, 1])
+benchmark_algo([9, 9, 9])
+benchmark_algo([9, 10, 11, 12, 1, 2])
+benchmark_algo([1, 4, 25, 87, 10])
