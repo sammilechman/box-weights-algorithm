@@ -27,7 +27,11 @@ describe "box sorting algorithm" do
     end
 
     it "when a too-heavy item is encountered" do
-      expect(my_algorithm([1,4,25,10])).to eq([[10,4,1],[25]])
+      expect(my_algorithm([1, 4, 25, 10])).to eq([[10, 4, 1], [25]])
+    end
+
+    it "when multiple too-heavy items are encountered" do
+      expect(my_algorithm([1, 4, 25, 87, 10])).to eq([[10, 4, 1], [25], [87]])
     end
   end
 
