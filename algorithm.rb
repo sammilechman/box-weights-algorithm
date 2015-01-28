@@ -53,9 +53,7 @@ def raise_exception_if_invalid(arr)
   raise "Input array is empty" if arr.empty?
   arr.each do |el|
     if (el.is_a?(Float) || el.is_a?(Fixnum))
-      if !(el >= 0)
-        raise "Invalid weight - less than 0"
-      end
+      raise "Invalid weight - less than 0" if !(el >= 0)
     else
       raise "Invalid weight - not a number"
     end
