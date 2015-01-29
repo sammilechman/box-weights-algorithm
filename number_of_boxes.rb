@@ -40,6 +40,3 @@ def number_of_boxes(array)
 
   ((missed_opportunity_space + array.sum) / MAX_WEIGHT).ceil
 end
-
-p number_of_boxes([8, 4, 2, 2, 2, 2, 2, 2])
-p number_of_boxes([9, 9, 9])
