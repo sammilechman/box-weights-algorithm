@@ -35,5 +35,3 @@ def generate_boxes(array)
   num_return_arrays += oversized_packages.count
   Array.new(num_return_arrays) { [] }
 end
-
-#TO DO: determine boxes better.
