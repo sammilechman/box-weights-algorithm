@@ -1,3 +1,5 @@
+# http://aaaipress.org/Papers/AAAI/2002/AAAI02-110.pdf
+
 require 'active_support/core_ext'
 require 'pry'
 
