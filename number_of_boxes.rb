@@ -1,4 +1,5 @@
 require 'active_support/core_ext'
+require 'pry'
 
 MAX_WEIGHT = 16.0
 
@@ -18,7 +19,7 @@ def number_of_boxes(array)
       total_secondary_adds << arr.pop
     end
 
-    if total_secondary_adds.sum + space_left >= MAX_WEIGHT
+    if total_secondary_adds.sum >= space_left
       box << space_left
       leftover_for_next_box = total_secondary_adds.sum - space_left
     else
@@ -40,3 +41,5 @@ def number_of_boxes(array)
 
   ((missed_opportunity_space + array.sum) / MAX_WEIGHT).ceil
 end
+
+number_of_boxes([3,2,5])
